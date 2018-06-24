@@ -27,4 +27,10 @@ fi
 # patch: #modprobe gc2035
 # patch: modprobe ov5640
 # patch: modprobe vfe_v4l2
-
+if ! grep "enabling camera" /etc/rc.local ; then
+  ${SUDO} sed -i -e '$i \# enabling camera' /etc/rc.local
+  ${SUDO} sed -i -e '$i sunxi-pio -m \"PG11<1><0><1><1>\"' /etc/rc.local
+  ${SUDO} sed -i -e '$i \#modprobe gc2035' /etc/rc.local
+  ${SUDO} sed -i -e '$i modprobe ov5640' /etc/rc.local
+  ${SUDO} sed -i -e '$i modprobe vfe_v4l2' /etc/rc.local
+fi
